@@ -26,10 +26,11 @@ abstract class Foundation
     /**
      * input value validate
      */
-    protected function __construct($value)
+    public function __construct($value)
     {
         $this->rules = new Rules();
         $this->setDefaultRule();
+        $this->setErrorDescriptions();
 
         $this->original = $value;
     }
@@ -75,6 +76,18 @@ abstract class Foundation
     }
 
     /**
+     * validate
+     *
+     * @return bool
+     */
+    protected function validate($value): bool
+    {
+        $this->errors = $this->rules->apply($value);
+
+        return !$this->hasErrors();
+    }
+
+    /**
      * has error this data
      *
      * @return bool
@@ -96,8 +109,11 @@ abstract class Foundation
 
     /**
      * set default rules
-     *
-     * @return void
      */
-    protected function setDefaultRule(): void;
+    abstract protected function setDefaultRule(): void;
+
+    /**
+     * set error discriptions.
+     */
+    abstract protected function setErrorDescriptions(): void;
 }

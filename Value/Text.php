@@ -7,28 +7,13 @@ use Clean\Value\Foundation;
 /**
  * string value object
  */
-class String extends Foundation implements ValueObject
+class Text extends Foundation implements ValueObject
 {
     /** @var int $minLength enable min length value. */
     protected $minLength;
 
     /** @var int $maxLength enable max length value. */
     protected $maxLength;
-
-    /** @var array error description list */
-    protected $errorDescriptions = [
-        'notString' => 'Not string value.',
-        'minLength' => function (string $value) {
-            $format = "Can't use %s characters string. You can use more than %s characters.";
-
-            return sprintf($format, mb_strlen($value), $this->minLength);
-        },
-        'maxLength' => function (string $value) {
-            $format = "Can't use %s characters string. Can use up to %s characters";
-
-            return sprintf($format, mb_strlen($value), $this->maxLength);
-        }
-    ];
 
     /**
      * set value.
@@ -65,18 +50,6 @@ class String extends Foundation implements ValueObject
     }
 
     /**
-     * validate value
-     *
-     * @return bool
-     */
-    protected function validate($value): bool
-    {
-        $this->errors = $this->rules->apply($value);
-
-        return !$this->hasErrors();
-    }
-
-    /**
      * set default rule.
      */
     protected function setDefaultRule()
@@ -85,7 +58,7 @@ class String extends Foundation implements ValueObject
             ->add('notString', [
                 'final' => true,
                 'rule'  => function ($value) {
-                    return !is_scalar($value));
+                    return !is_scalar($value);
                 }
             ])
             ->add('minLength', [
@@ -102,5 +75,25 @@ class String extends Foundation implements ValueObject
                     return $this->maxLength && $len > $max;
                 }
             ]);
+    }
+
+    /**
+     * set error descriptions
+     */
+    protected function setErrorDescriptions(): void
+    {
+        $this->errorDescriptions = [
+            'notString' => 'Not string value.',
+            'minLength' => function (string $value) {
+                $format = "Can't use %s characters string. You can use more than %s characters.";
+
+                return sprintf($format, mb_strlen($value), $this->minLength);
+            },
+            'maxLength' => function (string $value) {
+                $format = "Can't use %s characters string. Can use up to %s characters";
+
+                return sprintf($format, mb_strlen($value), $this->maxLength);
+            }
+        ];
     }
 }

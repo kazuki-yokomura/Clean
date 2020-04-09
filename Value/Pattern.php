@@ -2,12 +2,12 @@
 declare(strict_types=1, encoding='UTF-8');
 namespace Clean\Value;
 
-use Clean\Value\String;
+use Clean\Value\Text;
 
 /**
  * regex pattern value object
  */
-class Pattern extends String
+class Pattern extends Text
 {
     protected $pattern;
 
@@ -40,32 +40,23 @@ class Pattern extends String
         return $this->value;
     }
 
-    /**
-     * validate
-     *
-     * @param  mixed $value input value
-     * @return bool
-     */
-    public function validate($value): bool
-    {
-        $this->errors = $this->rules->apply($value);
-
-        return !$this->hasErrors();
-    }
-
     protected function setDefaultRule()
     {
+        parent::setDefaultRule();
         $this->rules
-            ->add('notString', [
-                'final' => true,
-                'rule'  => function ($value) {
-                    return is_scalar($value);
-                }
-            ])
             ->add('missPattern', [
                 'rule'  => function ($value) {
                     return preg_match($this->pattern, $value);
                 }
             ]);
+    }
+
+    /**
+     * set error descriptions
+     */
+    protected function setErrorDescriptions(): void
+    {
+        parent::setErrorDescriptions();
+        $this->errorDescriptions['missPattern'] = 'Miss match pattern.';
     }
 }

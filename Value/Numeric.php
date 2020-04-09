@@ -28,20 +28,6 @@ class Numeric extends Foundation implements ValueObject
     /** @var int round type */
     protected $roundHalf = PHP_ROUND_HALF_UP;
 
-    protected $errorDescriptions = [
-        'invalid'  => 'Not numeric value.',
-        'minValue' => function ($value) {
-            $format = "Minimam value is %f. Can't input %f.";
-
-            return sprintf($format, $this->minValue, $value);
-        },
-        'maxValue' => function ($value) {
-            $format = "Maximam value is %f. Can't input %f.";
-
-            return sprintf($format, $this->maxValue, $value);
-        }
-    ];
-
     /**
      * set value.
      *
@@ -120,18 +106,6 @@ class Numeric extends Foundation implements ValueObject
     }
 
     /**
-     * validate numeric
-     *
-     * @return bool
-     */
-    protected function validate($value): bool
-    {
-        $this->errors = $this->rules->apply($value);
-
-        return !$this->hasErrors();
-    }
-
-    /**
      * set default rule.
      */
     protected function setDefaultRule()
@@ -153,5 +127,25 @@ class Numeric extends Foundation implements ValueObject
                     return (!isset($this->maxValue) || $value <= $this->maxValue);
                 }
             ]);
+    }
+
+    /**
+     * set error descriptions
+     */
+    protected function setErrorDescriptions(): void
+    {
+        $this->errorDescriptions = [
+            'invalid'  => 'Not numeric value.',
+            'minValue' => function ($value) {
+                $format = "Minimam value is %f. Can't input %f.";
+
+                return sprintf($format, $this->minValue, $value);
+            },
+            'maxValue' => function ($value) {
+                $format = "Maximam value is %f. Can't input %f.";
+
+                return sprintf($format, $this->maxValue, $value);
+            }
+        ];
     }
 }

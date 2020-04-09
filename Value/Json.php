@@ -13,12 +13,6 @@ class Json extends Structure implements ValueObject
     /** @var int $options json encode/decode options */
     protected $options = 0;
 
-    protected $errorDescriptions = [
-        '__parseError' => function ($value) {
-            return json_last_error_msg();
-        }
-    ];
-
     public function __construct($value)
     {
         parent::__construct($value);
@@ -39,19 +33,6 @@ class Json extends Structure implements ValueObject
     public function __toString()
     {
         return (string)json_encode($value, $this->options);
-    }
-
-    /**
-     * json scheme validate
-     *
-     * @param  mixed $value parsed or stringfy value
-     * @return bool
-     */
-    protected function validate($value): bool
-    {
-        $this->errors = $this->rules->apply();
-
-        return !$this->hasErrors();
     }
 
     /**
@@ -81,5 +62,16 @@ class Json extends Structure implements ValueObject
             }
         ]);
         parent::setDefaultRule();
+    }
+
+    /**
+     * set error descriptions
+     */
+    protected function setErrorDescriptions(): void
+    {
+        parent::setErrorDescriptions();
+        $this->errorDescriptions['__parseError'] = function ($value) {
+            return json_last_error_msg();
+        };
     }
 }

@@ -57,21 +57,6 @@ class Structure extends Foundation
     }
 
     /**
-     * validate structure
-     *
-     * @param  mixed input value
-     * @return bool
-     */
-    protected function validate($value): bool
-    {
-        // TODO: 比較
-        // TODO: Date
-        $this->errors = $this->rules->apply();
-
-        return !$this->hasErrors();
-    }
-
-    /**
      * get parsed value
      *
      * @return mixed
@@ -122,6 +107,8 @@ class Structure extends Foundation
      */
     protected function setDefaultRule(): void
     {
+        // TODO: 比較
+        // TODO: Date
         foreach ($this->scheme as $key => $value) {
             $canEmpty = isset($this->empty[$key]);
             $this->rules->add($key, [

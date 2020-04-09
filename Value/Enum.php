@@ -11,22 +11,6 @@ use ReflectionObject;
 class Enum extends Foundation implements ValueObject
 {
     /**
-     * error descriptions
-     *
-     * @var array
-     */
-    protected $errorDescriptions = [
-        'invalid' => function ($value) {
-            $format = 'Invalid argument "%s".';
-            if (is_array($value)) {
-                $value = json_encode($value);
-            }
-
-            return sprintf($format, $value);
-        }
-    ];
-
-    /**
      * validate enum
      *
      * @param mixed $value
@@ -65,18 +49,6 @@ class Enum extends Foundation implements ValueObject
     }
 
     /**
-     * validate
-     *
-     * @return bool
-     */
-    protected function validate($value): bool
-    {
-        $this->errors = $this->rules->apply($value);
-
-        return !$this->hasErrors();
-    }
-
-    /**
      * set default rule
      */
     protected function setDefaultRule(): void
@@ -91,5 +63,22 @@ class Enum extends Foundation implements ValueObject
                     return in_array($value, $consts);
                 }
             ]);
+    }
+
+    /**
+     * not check value. All type cast bool.
+     */
+    protected function setErrorDescriptions(): void
+    {
+        $this->errorDescriptions = [
+            'invalid' => function ($value) {
+                $format = 'Invalid argument "%s".';
+                if (is_array($value)) {
+                    $value = json_encode($value);
+                }
+
+                return sprintf($format, $value);
+            }
+        ];
     }
 }
