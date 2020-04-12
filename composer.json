@@ -1,0 +1,16 @@
+{
+    "name": "yokomurakazuki/clean",
+    "description": "clean architecture test",
+    "type": "library",
+    "authors": [
+        {
+            "name": "yokomura kazuki",
+            "email": "foxtail814@gmail.com"
+        }
+    ],
+    "url": "https://github.com/kazuki-yokomura/Clean.git",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "6.3"
+    }
+}

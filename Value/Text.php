@@ -2,6 +2,7 @@
 declare(strict_types=1, encoding='UTF-8');
 namespace Clean\Value;
 
+use Clean\Rules\Method;
 use Clean\Value\Foundation;
 
 /**
@@ -9,11 +10,11 @@ use Clean\Value\Foundation;
  */
 class Text extends Foundation implements ValueObject
 {
-    /** @var int $minLength enable min length value. */
-    protected $minLength;
+    /** @var int $minCharacters enable min length value. */
+    protected $minCharacters;
 
-    /** @var int $maxLength enable max length value. */
-    protected $maxLength;
+    /** @var int $maxCharacters enable max length value. */
+    protected $maxCharacters;
 
     /**
      * set value.
@@ -57,23 +58,15 @@ class Text extends Foundation implements ValueObject
         $this->rules
             ->add('notString', [
                 'final' => true,
-                'rule'  => function ($value) {
-                    return !is_scalar($value);
-                }
+                'rule'  => 'isScalar'
             ])
             ->add('minLength', [
-                'rule' => function ($value) {
-                    $len = mb_strlen($value);
-
-                    return $this->minLength && $len < $min;
-                }
+                'rule' => 'minCharacters',
+                'vars' => ['min' => $this->minCharacters]
             ])
             ->add('maxLength', [
-                'rule' => function ($value) {
-                    $len = mb_strlen($value);
-
-                    return $this->maxLength && $len > $max;
-                }
+                'rule' => 'maxCharacters',
+                'vars' => ['max' => $this->maxCharacters]
             ]);
     }
 

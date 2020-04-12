@@ -57,9 +57,7 @@ class Json extends Structure implements ValueObject
     {
         $this->rules->add('__parseError', [
             'final' => true,
-            'rule'  => function ($value) {
-                return json_encode($value, $this->options) !== false;
-            }
+            'rule'  => 'canJsonEncode'
         ]);
         parent::setDefaultRule();
     }

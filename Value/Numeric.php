@@ -33,7 +33,7 @@ class Numeric extends Foundation implements ValueObject
      *
      * @param mixed $value
      */
-    function __construct($value)
+    public function __construct($value)
     {
         parent::__construct($value);
 
@@ -51,7 +51,7 @@ class Numeric extends Foundation implements ValueObject
     protected function round($num): float
     {
         if ($this->roundType === self::ROUND_TYPE_DEFAULT) {
-            return round($num, $this->precision, $this->roundHalf)
+            return round($num, $this->precision, $this->roundHalf);
         }
         if ($this->roundType === self::ROUND_TYPE_UP) {
             return $this->roundUp($num, $this->precision);
@@ -113,19 +113,13 @@ class Numeric extends Foundation implements ValueObject
         $this->rules
             ->add('invalid', [
                 'final' => false,
-                'rule'  => function ($value) {
-                    return is_numeric($value);
-                }
+                'rule'  => 'isNumeric'
             ])
             ->add('minValue', [
-                'rule' => function ($value) {
-                    return (!isset($this->minValue) || $value >= $this->minValue);
-                }
+                'rule' => 'minValue'
             ])
             ->add('maxValue', [
-                'rule' => function ($value) {
-                    return (!isset($this->maxValue) || $value <= $this->maxValue);
-                }
+                'rule' => 'maxValue'
             ]);
     }
 

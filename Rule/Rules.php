@@ -6,11 +6,15 @@ use Closure;
 
 /**
  * roules object
+ *
+ * @uses \Clean\Rule\Method
  */
 class Rules
 {
+    /** @const DEFAULT_RULE */
     const DEFAULT_RULE = [
-        'final' => false
+        'final' => false,
+        'vars'  => []
     ];
 
     private $rules = [];
@@ -39,8 +43,12 @@ class Rules
     {
         $errors = [];
         foreach ($this->rules as $name => $rule) {
-            if (!$rule['rule']($value)) {
-                $errors[] = $name;
+            if (Method::$method($value, $rule['vars'])) {
+                continue;
+            }
+            $errors[] = $name;
+            if ($rule['final']) {
+                break;
             }
         }
 

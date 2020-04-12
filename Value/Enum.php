@@ -56,12 +56,8 @@ class Enum extends Foundation implements ValueObject
         $this->rule
             ->add('correctValue', [
                 'final' => true,
-                'rule'  => function ($value) {
-                    $ref    = new ReflectionObject($this);
-                    $consts = $ref->getConstants();
-
-                    return in_array($value, $consts);
-                }
+                'rule'  => 'hasConstant',
+                'vars'  => ['object' => $this]
             ]);
     }
 
