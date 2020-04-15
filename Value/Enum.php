@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1, encoding='UTF-8');
+declare(strict_types=1);
 namespace Clean\Value;
 
 use Clean\Value\Foundation;

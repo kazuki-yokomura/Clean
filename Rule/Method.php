@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1, encoding='UTF-8');
+declare(strict_types=1);
 namespace Clean\Rule;
 
 /**
@@ -43,7 +43,7 @@ class Method
         extract($optional);
         $len = mb_strlen($str);
 
-        return !empty($min) || $len < $min;
+        return empty($min) || $len >= $min;
     }
 
     /**
@@ -56,9 +56,9 @@ class Method
     public static function maxCharacters(string $str, array $optional): bool
     {
         extract($optional);
-        $len = mb_strlen($value);
+        $len = mb_strlen($str);
 
-        return !empty($max) && $len > $max;
+        return empty($max) || $len <= $max;
     }
 
     /**
@@ -72,7 +72,7 @@ class Method
     {
         extract($optional);
 
-        return !empty($min) || $numeric < $min;
+        return empty($min) || $numeric >= $min;
     }
 
     /**
@@ -86,7 +86,7 @@ class Method
     {
         extract($optional);
 
-        return !empty($max) || $numeric < $max;
+        return empty($max) || $numeric <= $max;
     }
 
     /**
@@ -100,7 +100,7 @@ class Method
     {
         extract($optional);
 
-        return preg_match($pattern, $value);
+        return preg_match($pattern, $value) === 1;
     }
 
     /**
@@ -113,6 +113,7 @@ class Method
     public static function canJsonEncode($value, array $optional): bool
     {
         extract($optional);
+        $option = empty($option) ? 0 : $option;
 
         return json_encode($value, $option) !== false;
     }
