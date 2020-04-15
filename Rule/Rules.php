@@ -13,8 +13,9 @@ class Rules
 {
     /** @const DEFAULT_RULE */
     const DEFAULT_RULE = [
-        'final' => false,
-        'vars'  => []
+        'final'   => false,
+        'vars'    => [],
+        'message' => ''
     ];
 
     private $rules = [];
@@ -46,12 +47,28 @@ class Rules
             if (Method::$method($value, $rule['vars'])) {
                 continue;
             }
-            $errors[] = $name;
+
+            $errors[$name] = $this->getErrorMessage($value, $rule);
+
             if ($rule['final']) {
                 break;
             }
         }
 
         return $errors;
+    }
+
+    /**
+     * get error message rule
+     *
+     * @return string
+     */
+    protected function getErrorMessage($value, array $rule): string
+    {
+        if (is_a($rule['message'], 'Closure')) {
+            return $rule['message']($value);
+        }
+
+        return $rule['message'];
     }
 }

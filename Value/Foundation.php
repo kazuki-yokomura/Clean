@@ -30,7 +30,6 @@ abstract class Foundation
     {
         $this->rules = new Rules();
         $this->setRule();
-        $this->setErrorDescriptions();
 
         $this->original = $value;
     }
@@ -53,26 +52,6 @@ abstract class Foundation
     public function getErrors(string $name, string $description): array
     {
         return $this->errors;
-    }
-
-    /**
-     * return error messages.
-     *
-     * @return array
-     */
-    public function getErrorMessages(): array
-    {
-        $messages = [];
-        foreach ($this->errors as $name) {
-            $message = $this->errorDescriptions[$name];
-            if (is_a($message, 'Closure')) {
-                $messages[] = $message($this->original);
-            } else {
-                $messages[] = $message;
-            }
-        }
-
-        return $message;
     }
 
     /**
@@ -112,8 +91,6 @@ abstract class Foundation
      */
     abstract protected function setRule(): void;
 
-    /**
-     * set error discriptions.
-     */
-    abstract protected function setErrorDescriptions(): void;
+    // TODO: やっぱりエラ〜メッセージは継承したときようんに必要だわ。
+    // もう毎回 value が渡ってくるようにして、メッセージプロパティに入れるようにしよう
 }

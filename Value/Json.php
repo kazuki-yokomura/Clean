@@ -56,20 +56,12 @@ class Json extends Structure implements ValueObject
     protected function setRule()
     {
         $this->rules->add('__parseError', [
-            'final' => true,
-            'rule'  => 'canJsonEncode'
+            'final'   => true,
+            'rule'    => 'canJsonEncode',
+            'message' => function ($value) {
+                return json_last_error_msg();
+            }
         ]);
         parent::setRule();
-    }
-
-    /**
-     * set error descriptions
-     */
-    protected function setErrorDescriptions(): void
-    {
-        parent::setErrorDescriptions();
-        $this->errorDescriptions['__parseError'] = function ($value) {
-            return json_last_error_msg();
-        };
     }
 }

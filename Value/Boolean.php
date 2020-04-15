@@ -57,11 +57,4 @@ class Boolean extends Foundation implements ValueObject
     protected function setRule(): void
     {
     }
-
-    /**
-     * not check value. All type cast bool.
-     */
-    protected function setErrorDescriptions(): void
-    {
-    }
 }

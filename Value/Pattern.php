@@ -45,17 +45,9 @@ class Pattern extends Text
         parent::setRule();
         $this->rules
             ->add('missPattern', [
-                'rule' => 'pregMatch',
-                'vars' => ['pattern' => $this->pattern]
+                'rule'    => 'pregMatch',
+                'vars'    => ['pattern' => $this->pattern],
+                'message' => 'Miss match pattern.'
             ]);
-    }
-
-    /**
-     * set error descriptions
-     */
-    protected function setErrorDescriptions(): void
-    {
-        parent::setErrorDescriptions();
-        $this->errorDescriptions['missPattern'] = 'Miss match pattern.';
     }
 }

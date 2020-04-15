@@ -1,27 +1,36 @@
 <?php
+declare(strict_types=1);
+namespace Clean\Value;
+
+use Clean\Value\Foundation;
 
 /**
  * structure value object
  */
-class Structure extends Foundation
+abstract class Structure extends Foundation
 {
     /**
-     * @var array $scheme json scheme
+     * @var array $scheme structure scheme
      * array (
-     *     {key} => {value object class name}
+     *     {key} => array (
+     *         'type'       => {Value Object Class (full Class name)}
+     *         'empty'      => {bool or Closure},
+     *         'comparison' => array({'under' or 'over' or 'Equal'}, 'key')
+     *     )
      * )
      */
     protected $scheme = [];
 
     public function __construct($value)
     {
+        $this->setScheme();
         parent::__construct($value);
 
-        $patched = $this->patchScheme($value);
+        $patched = $this->patch($value);
 
         $value = $this->getParsedValue($value);
         if ($this->validate($value)) {
-            $this->value    = $patched;
+            $this->value = $patched;
         }
     }
 
@@ -35,7 +44,13 @@ class Structure extends Foundation
         return (string)json_encode($value);
     }
 
-    protected function patchScheme(array $input)
+    /**
+     * patch input value
+     *
+     * @param  array  $input input value
+     * @return array
+     */
+    protected function patch(array $input): array
     {
         $structure = [];
         foreach ($this->intersectScheme($input) as $key => $scheme) {
@@ -109,17 +124,25 @@ class Structure extends Foundation
     {
         // TODO: 比較
         // TODO: Date
-        foreach ($this->scheme as $key => $value) {
-            $canEmpty = isset($this->empty[$key]);
-            $this->rules->add($key, [
-                'rule' => function ($value) use ($key, $canEmpty) {
-                    if ($canEmpty) {
-                        return true;
-                    }
+        $defaultInfo = [
+            'empty'      => false,
+            'comparison' => null
+        ];
 
-                    return !is_null($value[$key]);
-                }
-            ]);
+        foreach ($this->scheme as $key => $valueInfo) {
+            $valueInfo += $defaultInfo;
+            if ($valueInfo['empty']) {
+                $this->rules->add($key, [
+                    'rule' => function ($value) use ($key) {
+                        return !empty($value[$key]);
+                    }
+                ]);
+            }
         }
     }
+
+    /**
+     * set structure scheme
+     */
+    abstract public function setScheme(): void;
 }

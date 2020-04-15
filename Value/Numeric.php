@@ -112,34 +112,25 @@ class Numeric extends Foundation implements ValueObject
     {
         $this->rules
             ->add('invalid', [
-                'final' => false,
-                'rule'  => 'isNumeric'
+                'final'   => false,
+                'rule'    => 'isNumeric',
+                'message' => 'Not numeric value.'
             ])
             ->add('minValue', [
-                'rule' => 'minValue'
+                'rule'    => 'minValue',
+                'message' => function ($value) {
+                    $format = "Minimam value is %f. Can't input %f.";
+
+                    return sprintf($format, $this->minValue, $value);
+                }
             ])
             ->add('maxValue', [
-                'rule' => 'maxValue'
+                'rule'    => 'maxValue',
+                'message' => function ($value) {
+                    $format = "Maximam value is %f. Can't input %f.";
+
+                    return sprintf($format, $this->maxValue, $value);
+                }
             ]);
-    }
-
-    /**
-     * set error descriptions
-     */
-    protected function setErrorDescriptions(): void
-    {
-        $this->errorDescriptions = [
-            'invalid'  => 'Not numeric value.',
-            'minValue' => function ($value) {
-                $format = "Minimam value is %f. Can't input %f.";
-
-                return sprintf($format, $this->minValue, $value);
-            },
-            'maxValue' => function ($value) {
-                $format = "Maximam value is %f. Can't input %f.";
-
-                return sprintf($format, $this->maxValue, $value);
-            }
-        ];
     }
 }

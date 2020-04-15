@@ -7,8 +7,10 @@ use ReflectionObject;
 
 /**
  * Enum value object
+ *
+ * set constract before use
  */
-class Enum extends Foundation implements ValueObject
+abstract class Enum extends Foundation implements ValueObject
 {
     /**
      * validate enum
@@ -69,25 +71,16 @@ class Enum extends Foundation implements ValueObject
         $this->rule
             ->add('correctValue', [
                 'final' => true,
-                'rule'  => 'hasConstant',
-                'vars'  => ['object' => $this]
-            ]);
-    }
+                'rule'    => 'hasConstant',
+                'vars'    => ['object' => $this],
+                'message' => function ($value) {
+                    $format = 'Invalid argument "%s".';
+                    if (is_array($value)) {
+                        $value = json_encode($value);
+                    }
 
-    /**
-     * not check value. All type cast bool.
-     */
-    protected function setErrorDescriptions(): void
-    {
-        $this->errorDescriptions = [
-            'invalid' => function ($value) {
-                $format = 'Invalid argument "%s".';
-                if (is_array($value)) {
-                    $value = json_encode($value);
+                    return sprintf($format, $value);
                 }
-
-                return sprintf($format, $value);
-            }
-        ];
+            ]);
     }
 }
