@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
-
 namespace Clean\Value;
+
+use Clean\Interfaces\Value\ValueObject;
+use Clean\Rule\Rules;
 
 /**
  * data object foundation
  */
-abstract class Foundation
+abstract class Foundation implements ValueObject
 {
     /** @var array $errors */
     protected $errors = [];
@@ -49,7 +51,7 @@ abstract class Foundation
      *
      * @return self
      */
-    public function getErrors(string $name, string $description): array
+    public function getErrors(): array
     {
         return $this->errors;
     }

@@ -8,7 +8,7 @@ interface ValueObject
 {
     public function get();
 
-    public function hasError(): array;
+    public function hasErrors(): bool;
 
-    public function getError(): array;
+    public function getErrors(): array;
 }

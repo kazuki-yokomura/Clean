@@ -7,7 +7,7 @@ use Clean\Value\Foundation;
 /**
  * bool value object
  */
-class Boolean extends Foundation implements ValueObject
+class Boolean extends Foundation
 {
     /**
      * cast to bool

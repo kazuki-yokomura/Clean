@@ -2,12 +2,10 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
-use Clean\Value\Foundation;
-
 /**
  * structure value object
  */
-abstract class Structure extends Foundation
+abstract class Structure
 {
     /**
      * @var array $scheme structure scheme
@@ -133,7 +131,7 @@ abstract class Structure extends Foundation
             $valueInfo += $defaultInfo;
             if ($valueInfo['empty']) {
                 $this->rules->add($key, [
-                    'rule' => function ($value) use ($key) {
+                    'method' => function ($value) use ($key) {
                         return !empty($value[$key]);
                     }
                 ]);

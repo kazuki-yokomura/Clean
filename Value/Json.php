@@ -2,13 +2,13 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
-use Clean\Value\Structure;
 use Clean\Traits\UseSchemeTrait;
+use Clean\Value\Structure;
 
 /**
  * json value object
  */
-class Json extends Structure implements ValueObject
+class Json extends Structure
 {
     /** @var int $options json encode/decode options */
     protected $options = 0;
@@ -53,11 +53,11 @@ class Json extends Structure implements ValueObject
     /**
      * set rules
      */
-    protected function setRule()
+    protected function setRule(): void
     {
         $this->rules->add('__parseError', [
             'final'   => true,
-            'rule'    => 'canJsonEncode',
+            'method'  => 'canJsonEncode',
             'message' => function ($value) {
                 return json_last_error_msg();
             }

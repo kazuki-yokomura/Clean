@@ -7,7 +7,7 @@ use Clean\Value\Foundation;
 /**
  * numeric value object.
  */
-class Numeric extends Foundation implements ValueObject
+class Numeric extends Foundation
 {
     const ROUND_TYPE_UP = 1;
     const ROUND_TYPE_DOWN = 2;
@@ -108,16 +108,16 @@ class Numeric extends Foundation implements ValueObject
     /**
      * set default rule.
      */
-    protected function setRule()
+    protected function setRule(): void
     {
         $this->rules
             ->add('invalid', [
-                'final'   => false,
-                'rule'    => 'isNumeric',
+                'final'   => true,
+                'method'  => 'isNumeric',
                 'message' => 'Not numeric value.'
             ])
             ->add('minValue', [
-                'rule'    => 'minValue',
+                'method'  => 'minValue',
                 'message' => function ($value) {
                     $format = "Minimam value is %f. Can't input %f.";
 
@@ -125,7 +125,7 @@ class Numeric extends Foundation implements ValueObject
                 }
             ])
             ->add('maxValue', [
-                'rule'    => 'maxValue',
+                'method'  => 'maxValue',
                 'message' => function ($value) {
                     $format = "Maximam value is %f. Can't input %f.";
 

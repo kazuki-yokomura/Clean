@@ -8,13 +8,13 @@ use Clean\Value\Foundation;
 /**
  * string value object
  */
-class Text extends Foundation implements ValueObject
+class Text extends Foundation
 {
     /** @var int $minCharacters enable min length value. */
-    protected $minCharacters;
+    protected $minCharacters = 0;
 
     /** @var int $maxCharacters enable max length value. */
-    protected $maxCharacters;
+    protected $maxCharacters = 0;
 
     /**
      * set value.
@@ -53,16 +53,16 @@ class Text extends Foundation implements ValueObject
     /**
      * set default rule.
      */
-    protected function setRule()
+    protected function setRule(): void
     {
         $this->rules
             ->add('notString', [
                 'final'   => true,
-                'rule'    => 'isScalar',
+                'method'  => 'isScalar',
                 'message' => 'Not string value.'
             ])
             ->add('minLength', [
-                'rule'    => 'minCharacters',
+                'method'  => 'minCharacters',
                 'vars'    => ['min' => $this->minCharacters],
                 'message' => function (string $value) {
                     $format = "Can't use %s characters string. You can use more than %s characters.";
@@ -71,7 +71,7 @@ class Text extends Foundation implements ValueObject
                 }
             ])
             ->add('maxLength', [
-                'rule'    => 'maxCharacters',
+                'method'  => 'maxCharacters',
                 'vars'    => ['max' => $this->maxCharacters],
                 'message' => function (string $value) {
                     $format = "Can't use %s characters string. Can use up to %s characters";

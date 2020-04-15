@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
+use Clean\Interfaces\Value\ValueObject;
 use Clean\Value\Foundation;
 use ReflectionObject;
 
@@ -70,8 +71,8 @@ abstract class Enum extends Foundation implements ValueObject
     {
         $this->rule
             ->add('correctValue', [
-                'final' => true,
-                'rule'    => 'hasConstant',
+                'final'   => true,
+                'method'  => 'hasConstant',
                 'vars'    => ['object' => $this],
                 'message' => function ($value) {
                     $format = 'Invalid argument "%s".';

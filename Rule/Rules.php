@@ -1,11 +1,12 @@
 <?php
-declare(strict_types=1);
+// declare(strict_types=1);
 namespace Clean\Rule;
 
 use Closure;
 
 /**
  * roules object
+ * 正直普通に アダプターにして Cake Laravel のバリデーション使えばよかったかも
  *
  * @uses \Clean\Rule\Method
  */
@@ -44,7 +45,7 @@ class Rules
     {
         $errors = [];
         foreach ($this->rules as $name => $rule) {
-            if (Method::$method($value, $rule['vars'])) {
+            if (Method::{$rule['method']}($value, $rule['vars'])) {
                 continue;
             }
 
