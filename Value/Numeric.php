@@ -108,7 +108,7 @@ class Numeric extends Foundation implements ValueObject
     /**
      * set default rule.
      */
-    protected function setDefaultRule()
+    protected function setRule()
     {
         $this->rules
             ->add('invalid', [

@@ -49,9 +49,22 @@ class Enum extends Foundation implements ValueObject
     }
 
     /**
+     * check value
+     *
+     * @param  string $const constant name
+     * @return bool
+     */
+    public function is(string $const): bool
+    {
+        $expected = constant('self::' . $const);
+
+        return $this->value === $expected;
+    }
+
+    /**
      * set default rule
      */
-    protected function setDefaultRule(): void
+    protected function setRule(): void
     {
         $this->rule
             ->add('correctValue', [

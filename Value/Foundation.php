@@ -29,7 +29,7 @@ abstract class Foundation
     public function __construct($value)
     {
         $this->rules = new Rules();
-        $this->setDefaultRule();
+        $this->setRule();
         $this->setErrorDescriptions();
 
         $this->original = $value;
@@ -110,7 +110,7 @@ abstract class Foundation
     /**
      * set default rules
      */
-    abstract protected function setDefaultRule(): void;
+    abstract protected function setRule(): void;
 
     /**
      * set error discriptions.

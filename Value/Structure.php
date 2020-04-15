@@ -105,7 +105,7 @@ class Structure extends Foundation
     /**
      * set default rule
      */
-    protected function setDefaultRule(): void
+    protected function setRule(): void
     {
         // TODO: 比較
         // TODO: Date

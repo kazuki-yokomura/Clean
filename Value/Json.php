@@ -53,13 +53,13 @@ class Json extends Structure implements ValueObject
     /**
      * set rules
      */
-    protected function setDefaultRule()
+    protected function setRule()
     {
         $this->rules->add('__parseError', [
             'final' => true,
             'rule'  => 'canJsonEncode'
         ]);
-        parent::setDefaultRule();
+        parent::setRule();
     }
 
     /**
