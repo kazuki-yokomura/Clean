@@ -41,9 +41,11 @@ abstract class Foundation implements ValueObject
      *
      * @return self
      */
-    public function __invoke($value)
+    public function __invoke(...$constructValues)
     {
-        return new self($value);
+        $self = get_class($this);
+
+        return new $self(...$constructValues);
     }
 
     /**
