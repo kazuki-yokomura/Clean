@@ -13,6 +13,9 @@ use ReflectionObject;
  */
 abstract class Enum extends Foundation implements ValueObject
 {
+    /** @var array $displayMap array(const_name => display) */
+    protected $displayMap = [];
+
     /**
      * validate enum
      *
@@ -52,6 +55,19 @@ abstract class Enum extends Foundation implements ValueObject
     }
 
     /**
+     * display enum value
+     *
+     * @return string
+     */
+    public function display()
+    {
+        $ref    = new ReflectionObject($this);
+        $consts = $ref->getConstants();
+
+        return $this->displayMap[array_search($this->value, $consts)];
+    }
+
+    /**
      * check value
      *
      * @param  string $const constant name
@@ -59,9 +75,12 @@ abstract class Enum extends Foundation implements ValueObject
      */
     public function is(string $const): bool
     {
-        $expected = constant('self::' . $const);
+        $constantName = get_class($this) . '::' . $const;
+        if (!defined($constantName)) {
+            return false;
+        }
 
-        return $this->value === $expected;
+        return $this->value === constant($constantName);
     }
 
     /**
@@ -69,7 +88,7 @@ abstract class Enum extends Foundation implements ValueObject
      */
     protected function setRule(): void
     {
-        $this->rule
+        $this->rules
             ->add('correctValue', [
                 'final'   => true,
                 'method'  => 'hasConstant',

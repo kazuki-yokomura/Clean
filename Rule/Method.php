@@ -2,6 +2,8 @@
 // declare(strict_types=1);
 namespace Clean\Rule;
 
+use ReflectionObject;
+
 /**
  * rules validate method class
  * useable static
@@ -132,6 +134,6 @@ class Method
         $ref    = new ReflectionObject($object);
         $consts = $ref->getConstants();
 
-        return in_array($value, $consts);
+        return in_array($value, $consts, true);
     }
 }
