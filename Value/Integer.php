@@ -9,4 +9,14 @@ class Integer extends Numeric
 {
     /** @var int numeric precision */
     protected $precision = 0;
+
+    /**
+     * return this value
+     *
+     * @return int|float
+     */
+    public function get()
+    {
+        return (int)$this->value;
+    }
 }
