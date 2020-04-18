@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace Clean\Value;
 
 use Clean\Value\Foundation;
+use Clean\Rule\Method;
 
 /**
  * numeric value object.
@@ -14,16 +15,16 @@ class Numeric extends Foundation
     const ROUND_TYPE_DEFAULT = 4;
 
     /** @var int minimam value */
-    protected $minValue;
+    protected $minValue = 0;
 
     /** @var int maximam value */
-    protected $maxValue;
+    protected $maxValue = 0;
 
     /** @var int numeric precision */
-    protected $precision;
+    protected $precision = 2;
 
     /** @var int round type */
-    protected $roundType = ROUND_TYPE_DEFAULT;
+    protected $roundType = self::ROUND_TYPE_DEFAULT;
 
     /** @var int round type */
     protected $roundHalf = PHP_ROUND_HALF_UP;
@@ -45,19 +46,23 @@ class Numeric extends Foundation
     /**
      * round numeric
      *
-     * @param  int|float $num numeric
-     * @return float
+     * @param  mixed $value numeric
+     * @return mixed
      */
-    protected function round($num): float
+    protected function round($value)
     {
+        if (!Method::isNumeric($value)) {
+            return $value;
+        }
+
         if ($this->roundType === self::ROUND_TYPE_DEFAULT) {
-            return round($num, $this->precision, $this->roundHalf);
+            return round($value, $this->precision, $this->roundHalf);
         }
         if ($this->roundType === self::ROUND_TYPE_UP) {
-            return $this->roundUp($num, $this->precision);
+            return $this->roundUp($value, $this->precision);
         }
         if ($this->roundType === self::ROUND_TYPE_DOWN) {
-            return $this->roundDown($num, $this->precision);
+            return $this->roundDown($value, $this->precision);
         }
     }
 
@@ -118,6 +123,7 @@ class Numeric extends Foundation
             ])
             ->add('minValue', [
                 'method'  => 'minValue',
+                'vars'    => ['min' => $this->minValue],
                 'message' => function ($value) {
                     $format = "Minimam value is %f. Can't input %f.";
 
@@ -126,6 +132,7 @@ class Numeric extends Foundation
             ])
             ->add('maxValue', [
                 'method'  => 'maxValue',
+                'vars'    => ['max' => $this->maxValue],
                 'message' => function ($value) {
                     $format = "Maximam value is %f. Can't input %f.";
 

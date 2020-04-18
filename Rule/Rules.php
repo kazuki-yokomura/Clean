@@ -16,7 +16,8 @@ class Rules
     const DEFAULT_RULE = [
         'final'   => false,
         'vars'    => [],
-        'message' => ''
+        'message' => '',
+        'value'   => null
     ];
 
     private $rules = [];
