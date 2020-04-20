@@ -111,6 +111,96 @@ class Numeric extends Foundation
     }
 
     /**
+     * this value more than argument
+     *
+     * @param  Numeric|numeric $value
+     * @return bool
+     */
+    public function moreThan($value): bool
+    {
+        if (is_a($value, self::class)) {
+            return $this->get() > $value->get();
+        }
+
+        return $this->get() > $value;
+    }
+
+    /**
+     * this value more than argument
+     *
+     * @param  Numeric|numeric $value
+     * @return bool
+     */
+    public function lessThan($value): bool
+    {
+        if (is_a($value, self::class)) {
+            return $this->get() < $value->get();
+        }
+
+        return $this->get() < $value;
+    }
+
+    /**
+     * this value more than argument
+     *
+     * @param  Numeric|numeric $value
+     * @return bool
+     */
+    public function moreOr($value): bool
+    {
+        if (is_a($value, self::class)) {
+            return $this->get() >= $value->get();
+        }
+
+        return $this->get() >= $value;
+    }
+
+    /**
+     * this value more than argument
+     *
+     * @param  Numeric|numeric $value
+     * @return bool
+     */
+    public function lessOr($value): bool
+    {
+        if (is_a($value, self::class)) {
+            return $this->get() <= $value->get();
+        }
+
+        return $this->get() <= $value;
+    }
+
+    /**
+     * same this value and argument
+     *
+     * @param  Numeric|numeric $value
+     * @return bool
+     */
+    public function same($value): bool
+    {
+        if (is_a($value, self::class)) {
+            return $this->get() === $value->get();
+        }
+
+        return $this->get() === $value;
+    }
+
+    /**
+     * this value equals argument
+     *
+     * @param  Numeric|numeric $value
+     * @return bool
+     */
+    public function equals($value): bool
+    {
+        if (is_a($value, self::class)) {
+            return $this->get() == $value->get();
+        }
+
+        return $this->get() == $value;
+    }
+
+    /**
      * set default rule.
      */
     protected function setRule(): void

@@ -14,10 +14,12 @@ class Rules
 {
     /** @const DEFAULT_RULE */
     const DEFAULT_RULE = [
-        'final'   => false,
-        'vars'    => [],
-        'message' => '',
-        'value'   => null
+        'allow'    => false,
+        'final'    => false,
+        'vars'     => [],
+        'message'  => '',
+        'value'    => null,
+        'provider' => 'Clean\Rule\Method'
     ];
 
     private $rules = [];
@@ -46,11 +48,17 @@ class Rules
     {
         $errors = [];
         foreach ($this->rules as $name => $rule) {
-            if (Method::{$rule['method']}($value, $rule['vars'])) {
+            if ($this->validateMethod($value, $rule)) {
+                if ($rule['allow']) {
+                    break;
+                }
+                continue;
+            }
+            if ($rule['allow']) {
                 continue;
             }
 
-            $errors[$name] = $this->getErrorMessage($value, $rule);
+            $errors += $this->setErrors($name, $value, $rule);
 
             if ($rule['final']) {
                 break;
@@ -58,6 +66,39 @@ class Rules
         }
 
         return $errors;
+    }
+
+    /**
+     * apply method
+     *
+     * @param  mixed $value value
+     * @param  array  $rule rule
+     * @return bool
+     */
+    protected function validateMethod($value, array $rule): bool
+    {
+        return $rule['provider']::{$rule['method']}($value, $rule['vars']);
+    }
+
+    /**
+     * set error message
+     *
+     * @param string $name  rule name
+     * @param mixed  $value input value
+     * @param array  $rule  rule
+     */
+    protected function setErrors(string $name, $value, array $rule)
+    {
+        $levels = array_reverse(explode('.', $name));
+
+        $child = $this->getErrorMessage($value, $rule);
+        foreach ($levels as $name) {
+            $error = [];
+            $error[$name] = $child;
+            $child = $error;
+        }
+
+        return $error;
     }
 
     /**

@@ -2,18 +2,28 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
+use Clean\Value\Foundation;
+
 /**
  * structure value object
  */
-abstract class Structure
+abstract class Structure extends Foundation
 {
+    protected $value = [];
+
     /**
      * @var array $scheme structure scheme
      * array (
      *     {key} => array (
-     *         'type'       => {Value Object Class (full Class name)}
-     *         'empty'      => {bool or Closure},
-     *         'comparison' => array({'under' or 'over' or 'Equal'}, 'key')
+     *         'valueObject' => {Value Object Class (full Class name)},
+     *         'nullable'    => {allow empty value},
+     *         'default'     => {if empty set default},
+     *         'moreThan'    => {target key name},
+     *         'lessThan'    => {target key name},
+     *         'orMore'      => {target key name},
+     *         'orLess'      => {target key name},
+     *         'same'        => {target key name},
+     *         'equals'      => {target key name}
      *     )
      * )
      */
@@ -25,9 +35,7 @@ abstract class Structure
         parent::__construct($value);
 
         $patched = $this->patch($value);
-
-        $value = $this->getParsedValue($value);
-        if ($this->validate($value)) {
+        if ($this->validate($patched)) {
             $this->value = $patched;
         }
     }
@@ -52,7 +60,13 @@ abstract class Structure
     {
         $structure = [];
         foreach ($this->intersectScheme($input) as $key => $scheme) {
-            $structure[$key] = new $scheme($input[$key]);
+            if (!$scheme['nullable'] && !isset($input[$key]) && isset($scheme['default'])) {
+                $input[$key] = $scheme['default'];
+            }
+            if (!isset($input[$key])) {
+                $structure[$key] = null;
+            }
+            $structure[$key] = new $scheme['valueObject']($input[$key]);
         }
 
         return $structure;
@@ -88,6 +102,9 @@ abstract class Structure
     {
         $valueErrors = [];
         foreach ($this->value as $key => $valueObject) {
+            if (is_null($valueObject)) {
+                continue;
+            }
             if ($errors = $valueObject->getErrors()) {
                 $valueErrors[$key] = $errors;
             }
@@ -120,20 +137,91 @@ abstract class Structure
      */
     protected function setRule(): void
     {
-        // TODO: 比較
-        // TODO: Date
         $defaultInfo = [
-            'empty'      => false,
-            'comparison' => null
+            'nullable'  => false,
+            'moreThan'  => null,
+            'lessThan'  => null,
+            'orMore'    => null,
+            'orLess'    => null,
+            'same'      => null,
+            'equals'    => null,
         ];
 
+        // TODO: message
         foreach ($this->scheme as $key => $valueInfo) {
             $valueInfo += $defaultInfo;
-            if ($valueInfo['empty']) {
+            if ($valueInfo['nullable']) {
                 $this->rules->add($key, [
-                    'method' => function ($value) use ($key) {
-                        return !empty($value[$key]);
-                    }
+                    'allow'    => true,
+                    'method'   => 'isNull',
+                    'vars'     => ['key' => $key],
+                    'provider' => 'Clean\Rule\AllowMethod'
+                ]);
+            } else {
+                $this->rules->add($key . '.isNotNull', [
+                    'method'   => 'isNotNull',
+                    'vars'     => ['key' => $key],
+                    'provider' => 'Clean\Rule\StructureMethod'
+                ]);
+            }
+            if ($target = $valueInfo['moreThan']) {
+                $this->rules->add($key . '.moreThan', [
+                    'method' => 'moreThan',
+                    'vars'   => [
+                        'key'      => $key,
+                        'target'   => $target,
+                    ],
+                    'provider' => 'Clean\Rule\StructureMethod'
+                ]);
+            }
+            if ($target = $valueInfo['lessThan']) {
+                $this->rules->add($key . '.lessThan', [
+                    'method' => 'lessThan',
+                    'vars'   => [
+                        'key'      => $key,
+                        'target'   => $target,
+                    ],
+                    'provider' => 'Clean\Rule\StructureMethod'
+                ]);
+            }
+            if ($target = $valueInfo['moreOr']) {
+                $this->rules->add($key . '.moreOr', [
+                    'method' => 'moreOr',
+                    'vars'   => [
+                        'key'      => $key,
+                        'target'   => $target,
+                    ],
+                    'provider' => 'Clean\Rule\StructureMethod'
+                ]);
+            }
+            if ($target = $valueInfo['lessOr']) {
+                $this->rules->add($key . '.lessOr', [
+                    'method' => 'lessOr',
+                    'vars'   => [
+                        'key'      => $key,
+                        'target'   => $target,
+                    ],
+                    'provider' => 'Clean\Rule\StructureMethod'
+                ]);
+            }
+            if ($target = $valueInfo['same']) {
+                $this->rules->add($key . '.same', [
+                    'method' => 'same',
+                    'vars'   => [
+                        'key'      => $key,
+                        'target'   => $target,
+                    ],
+                    'provider' => 'Clean\Rule\StructureMethod'
+                ]);
+            }
+            if ($target = $valueInfo['equals']) {
+                $this->rules->add($key . '.equals', [
+                    'method' => 'equals',
+                    'vars'   => [
+                        'key'      => $key,
+                        'target'   => $target,
+                    ],
+                    'provider' => 'Clean\Rule\StructureMethod'
                 ]);
             }
         }
@@ -142,5 +230,5 @@ abstract class Structure
     /**
      * set structure scheme
      */
-    abstract public function setScheme(): void;
+    abstract protected function setScheme(): void;
 }

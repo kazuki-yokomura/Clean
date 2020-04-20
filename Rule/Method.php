@@ -127,7 +127,7 @@ class Method
      * @param  array $optional append value
      * @return bool
      */
-    public static function hasConstant($value, array $optional)
+    public static function hasConstant($value, array $optional): bool
     {
         extract($optional);
 
