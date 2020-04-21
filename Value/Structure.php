@@ -59,17 +59,48 @@ abstract class Structure extends Foundation
     protected function patch(array $input): array
     {
         $structure = [];
-        foreach ($this->intersectScheme($input) as $key => $scheme) {
-            if (!$scheme['nullable'] && !isset($input[$key]) && isset($scheme['default'])) {
-                $input[$key] = $scheme['default'];
+        foreach ($this->scheme as $key => $valueInfo) {
+            if ($this->needSetDefault($input, $key)) {
+                $input[$key] = $valueInfo['default'];
             }
             if (!isset($input[$key])) {
                 $structure[$key] = null;
             }
-            $structure[$key] = new $scheme['valueObject']($input[$key]);
+            if ($this->needSkipPatch($input, $key)) {
+                continue;
+            }
+            $structure[$key] = new $valueInfo['valueObject']($input[$key]);
         }
 
         return $structure;
+    }
+
+    /**
+     * need set default
+     *
+     * @param  array  $input input values
+     * @param  string $key   key
+     * @return bool
+     */
+    protected function needSkipPatch(array $input, string $key)
+    {
+        $valueInfo = $this->scheme[$key];
+
+        return $valueInfo['nullable'] && is_null($input[$key]);
+    }
+
+    /**
+     * need set default
+     *
+     * @param  array  $input input values
+     * @param  string $key   key
+     * @return bool
+     */
+    protected function needSetDefault(array $input, string $key): bool
+    {
+        $valueInfo = $this->scheme[$key];
+
+        return !$valueInfo['nullable'] && !isset($input[$key]) && isset($valueInfo['default']);
     }
 
     /**
@@ -124,6 +155,9 @@ abstract class Structure extends Foundation
             return true;
         }
         foreach ($this->value as $key => $valueObject) {
+            if (is_null($valueObject)) {
+                continue;
+            }
             if ($valueObject->hasErrors()) {
                 return true;
             }

@@ -953,4 +953,56 @@ class StructureTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * @dataProvider nullableComparisonDataSet
+     */
+    public function testNullableComparison($value, $errors)
+    {
+        $structure = new class($value) extends Structure {
+            protected function setScheme(): void
+            {
+                $this->scheme = [
+                    'lower' => [
+                        'valueObject' => 'Clean\Value\Integer',
+                        'lessOr'      => 'higher',
+                        'nullable'    => true
+                    ],
+                    'higher' => [
+                        'valueObject' => 'Clean\Value\Numeric',
+                        'nullable'    => true
+                    ]
+                ];
+            }
+        };
+
+        $this->assertSame($errors, $structure->getErrors());
+    }
+
+    public function nullableComparisonDataSet()
+    {
+        return [
+            'both_null' => [
+                'both_null' => [
+                    'lower'  => null,
+                    'higher' => null
+                ],
+                'errors' => []
+            ],
+            'target_null' => [
+                'both_null' => [
+                    'lower'  => 234,
+                    'higher' => null
+                ],
+                'errors' => []
+            ],
+            'self_null' => [
+                'both_null' => [
+                    'lower'  => null,
+                    'higher' => 5.6
+                ],
+                'errors' => []
+            ],
+        ];
+    }
 }
