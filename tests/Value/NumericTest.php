@@ -222,4 +222,380 @@ class NumericTest extends TestCase
             ],
         ];
     }
+
+    /**
+     * @dataProvider moreThanDataSet
+     */
+    public function testMoreThan($value, $target, $expected)
+    {
+        $numeric = new Numeric($value);
+
+        $this->assertSame($expected, $numeric->moreThan($target));
+    }
+
+    public function moreThanDataSet()
+    {
+        return [
+            'valid' => [
+                'value'    => 457,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'float_valid' => [
+                'value'    => 12975.06,
+                'target'   => 12975.05,
+                'expected' => true
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => 12975.05,
+                'expected' => false
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => 1345.05,
+                'expected' => false
+            ],
+            'rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => 1345,
+                'expected' => false
+            ],
+            'tolerance_string_over' => [
+                'value'    => 2000,
+                'target'   => '1345.01',
+                'expected' => true
+            ],
+            'tolerance_string_under' => [
+                'value'    => 563.09,
+                'target'   => '564',
+                'expected' => false
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider moreLessDataSet
+     */
+    public function testLessThan($value, $target, $expected)
+    {
+        $numeric = new Numeric($value);
+
+        $this->assertSame($expected, $numeric->lessThan($target));
+    }
+
+    public function moreLessDataSet()
+    {
+        return [
+            'over' => [
+                'value'    => 457,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'float_over' => [
+                'value'    => 12975.06,
+                'target'   => 12975.05,
+                'expected' => false
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => 12975.05,
+                'expected' => false
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => 1345.05,
+                'expected' => true
+            ],
+            'rounded_value' => [
+                'value'    => 1345.999,
+                'target'   => 1346,
+                'expected' => false
+            ],
+            'tolerance_string_value' => [
+                'value'    => 2000,
+                'target'   => '1345.01',
+                'expected' => false
+            ],
+            'tolerance_string_under' => [
+                'value'    => 563.09,
+                'target'   => '564',
+                'expected' => true
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider moreOrDataSet
+     */
+    public function testMoreOr($value, $target, $expected)
+    {
+        $numeric = new Numeric($value);
+
+        $this->assertSame($expected, $numeric->moreOr($target));
+    }
+
+    public function moreOrDataSet()
+    {
+        return [
+            'over' => [
+                'value'    => 457,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'float_over' => [
+                'value'    => 12975.06,
+                'target'   => 12975.05,
+                'expected' => true
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => 12975.05,
+                'expected' => true
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => 1345.05,
+                'expected' => false
+            ],
+            'rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => 1345,
+                'expected' => true
+            ],
+            'tolerance_string_over' => [
+                'value'    => 2000,
+                'target'   => '1345.01',
+                'expected' => true
+            ],
+            'tolerance_string_under' => [
+                'value'    => 563.09,
+                'target'   => '564',
+                'expected' => false
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider moreLessOr
+     */
+    public function testLessOr($value, $target, $expected)
+    {
+        $numeric = new Numeric($value);
+
+        $this->assertSame($expected, $numeric->lessOr($target));
+    }
+
+    public function moreLessOr()
+    {
+        return [
+            'over' => [
+                'value'    => 457,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'float_over' => [
+                'value'    => 12975.06,
+                'target'   => 12975.05,
+                'expected' => false
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => 12975.05,
+                'expected' => true
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => 1345.05,
+                'expected' => true
+            ],
+            'rounded_value' => [
+                'value'    => 1345.999,
+                'target'   => 1346,
+                'expected' => true
+            ],
+            'tolerance_string_value' => [
+                'value'    => 2000,
+                'target'   => '1345.01',
+                'expected' => false
+            ],
+            'tolerance_string_under' => [
+                'value'    => 563.09,
+                'target'   => '564',
+                'expected' => true
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider sameDataSet
+     */
+    public function testSame($value, $target, $expected)
+    {
+        $numeric = new Numeric($value);
+
+        $this->assertSame($expected, $numeric->same($target));
+    }
+
+    public function sameDataSet()
+    {
+        return [
+            'over' => [
+                'value'    => 457,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => 456.0,
+                'expected' => true
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'float_over' => [
+                'value'    => 12975.06,
+                'target'   => 12975.05,
+                'expected' => false
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => 12975.05,
+                'expected' => true
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => 1345.05,
+                'expected' => false
+            ],
+            'rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => 1345.0,
+                'expected' => true
+            ],
+            'tolerance_string_over' => [
+                'value'    => 2000,
+                'target'   => '1345.01',
+                'expected' => false
+            ],
+            'tolerance_string_under' => [
+                'value'    => 563.09,
+                'target'   => '564',
+                'expected' => false
+            ],
+            'equals' => [
+                'value'    => 710,
+                'target'   => '710',
+                'expected' => false
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider equalsDataSet
+     */
+    public function testEquals($value, $target, $expected)
+    {
+        $numeric = new Numeric($value);
+
+        $this->assertSame($expected, $numeric->equals($target));
+    }
+
+    public function equalsDataSet()
+    {
+        return [
+            'over' => [
+                'value'    => 457,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => 456,
+                'expected' => true
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => 456,
+                'expected' => false
+            ],
+            'float_over' => [
+                'value'    => 12975.06,
+                'target'   => 12975.05,
+                'expected' => false
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => 12975.05,
+                'expected' => true
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => 1345.05,
+                'expected' => false
+            ],
+            'rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => 1345,
+                'expected' => true
+            ],
+            'tolerance_string_over' => [
+                'value'    => 2000,
+                'target'   => '1345.01',
+                'expected' => false
+            ],
+            'tolerance_string_under' => [
+                'value'    => 563.09,
+                'target'   => '564',
+                'expected' => false
+            ],
+            'equals' => [
+                'value'    => 710.06,
+                'target'   => '710.06',
+                'expected' => true
+            ],
+        ];
+    }
 }
