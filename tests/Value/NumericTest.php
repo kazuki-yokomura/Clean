@@ -1,7 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+use Clean\Value\Integer;
 use Clean\Value\Numeric;
+use PHPUnit\Framework\TestCase;
 
 /**
  *
@@ -281,6 +282,41 @@ class NumericTest extends TestCase
                 'target'   => '564',
                 'expected' => false
             ],
+            'obj_valid' => [
+                'value'    => 457,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'obj_same' => [
+                'value'    => 456,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_under' => [
+                'value'    => 455,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_float_valid' => [
+                'value'    => 12975.06,
+                'target'   => new Numeric(12975.05),
+                'expected' => true
+            ],
+            'obj_float_same' => [
+                'value'    => 12975.05,
+                'target'   => new Numeric(12975.05),
+                'expected' => false
+            ],
+            'obj_float_under' => [
+                'value'    => 1345.04,
+                'target'   => new Numeric(1345.05),
+                'expected' => false
+            ],
+            'obj_rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => new Integer(1345),
+                'expected' => false
+            ]
         ];
     }
 
@@ -341,6 +377,41 @@ class NumericTest extends TestCase
                 'value'    => 563.09,
                 'target'   => '564',
                 'expected' => true
+            ],
+            'obj_over' => [
+                'value'    => 457,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_same' => [
+                'value'    => 456,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_under' => [
+                'value'    => 455,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'obj_float_over' => [
+                'value'    => 12975.06,
+                'target'   => new Numeric(12975.05),
+                'expected' => false
+            ],
+            'obj_float_same' => [
+                'value'    => 12975.05,
+                'target'   => new Numeric(12975.05),
+                'expected' => false
+            ],
+            'obj_float_under' => [
+                'value'    => 1345.04,
+                'target'   => new Numeric(1345.05),
+                'expected' => true
+            ],
+            'obj_rounded_value' => [
+                'value'    => 1345.999,
+                'target'   => new Integer(1346),
+                'expected' => false
             ],
         ];
     }
@@ -403,6 +474,41 @@ class NumericTest extends TestCase
                 'target'   => '564',
                 'expected' => false
             ],
+            'obj_over' => [
+                'value'    => 457,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'obj_same' => [
+                'value'    => 456,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'obj_under' => [
+                'value'    => 455,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_float_over' => [
+                'value'    => 12975.06,
+                'target'   => new Numeric(12975.05),
+                'expected' => true
+            ],
+            'obj_float_same' => [
+                'value'    => 12975.05,
+                'target'   => new Numeric(12975.05),
+                'expected' => true
+            ],
+            'obj_float_under' => [
+                'value'    => 1345.04,
+                'target'   => new Numeric(1345.05),
+                'expected' => false
+            ],
+            'obj_rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => new Integer(1345),
+                'expected' => true
+            ],
         ];
     }
 
@@ -462,6 +568,41 @@ class NumericTest extends TestCase
             'tolerance_string_under' => [
                 'value'    => 563.09,
                 'target'   => '564',
+                'expected' => true
+            ],
+            'obj_over' => [
+                'value'    => 457,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_same' => [
+                'value'    => 456,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'obj_under' => [
+                'value'    => 455,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'obj_float_over' => [
+                'value'    => 12975.06,
+                'target'   => new Numeric(12975.05),
+                'expected' => false
+            ],
+            'obj_float_same' => [
+                'value'    => 12975.05,
+                'target'   => new Numeric(12975.05),
+                'expected' => true
+            ],
+            'obj_float_under' => [
+                'value'    => 1345.04,
+                'target'   => new Numeric(1345.05),
+                'expected' => true
+            ],
+            'obj_rounded_value' => [
+                'value'    => 1345.999,
+                'target'   => new Integer(1346),
                 'expected' => true
             ],
         ];
@@ -530,6 +671,46 @@ class NumericTest extends TestCase
                 'target'   => '710',
                 'expected' => false
             ],
+            'obj_over' => [
+                'value'    => 457,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_same' => [
+                'value'    => 456,
+                'target'   => new Numeric(456),
+                'expected' => true
+            ],
+            'obj_equals' => [
+                'value'    => 456,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'obj_under' => [
+                'value'    => 455,
+                'target'   => new Numeric(456),
+                'expected' => false
+            ],
+            'obj_float_over' => [
+                'value'    => 12975.06,
+                'target'   => new Numeric(12975.05),
+                'expected' => false
+            ],
+            'obj_float_same' => [
+                'value'    => 12975.05,
+                'target'   => new Numeric(12975.05),
+                'expected' => true
+            ],
+            'obj_float_under' => [
+                'value'    => 1345.04,
+                'target'   => new Numeric(1345.05),
+                'expected' => false
+            ],
+            'obj_rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => new Numeric(1345),
+                'expected' => true
+            ],
         ];
     }
 
@@ -594,6 +775,41 @@ class NumericTest extends TestCase
             'equals' => [
                 'value'    => 710.06,
                 'target'   => '710.06',
+                'expected' => true
+            ],
+            'over' => [
+                'value'    => 457,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'same' => [
+                'value'    => 456,
+                'target'   => new Integer(456),
+                'expected' => true
+            ],
+            'under' => [
+                'value'    => 455,
+                'target'   => new Integer(456),
+                'expected' => false
+            ],
+            'float_over' => [
+                'value'    => 12975.06,
+                'target'   => new Numeric(12975.05),
+                'expected' => false
+            ],
+            'float_same' => [
+                'value'    => 12975.05,
+                'target'   => new Numeric(12975.05),
+                'expected' => true
+            ],
+            'float_under' => [
+                'value'    => 1345.04,
+                'target'   => new Numeric(1345.05),
+                'expected' => false
+            ],
+            'rounded_value' => [
+                'value'    => 1345.001,
+                'target'   => new Integer(1345),
                 'expected' => true
             ],
         ];
