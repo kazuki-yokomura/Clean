@@ -12,6 +12,24 @@ use ReflectionObject;
  */
 class StructureMethod
 {
+
+    /**
+     * is allow check
+     *
+     * @param  array   $array    value
+     * @param  array   $optional append value
+     * @return bool
+     */
+    public function isAllowKeys(array $array, array $optional)
+    {
+        extract($optional);
+
+        $before = count($array);
+        $after  = count(array_intersect_key($array, array_flip($keys)));
+
+        return $before === $after;
+    }
+
     /**
      * is not null
      *
@@ -19,7 +37,7 @@ class StructureMethod
      * @param  array  $optional  append value
      * @return bool
      */
-    public function isNotNull($structure, $optional)
+    public function isNotNull($structure, array $optional)
     {
         extract($optional);
 

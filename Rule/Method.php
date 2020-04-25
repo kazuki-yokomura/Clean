@@ -25,12 +25,24 @@ class Method
 
     /**
      * is_numeric
+     *
      * @param  mixed $value input value
      * @return bool
      */
     public static function isNumeric($value): bool
     {
         return is_numeric($value);
+    }
+
+    /**
+     * is_array
+     *
+     * @param  mixed $value input value
+     * @return bool
+     */
+    public static function isArray($value): bool
+    {
+        return is_array($value);
     }
 
     /**
