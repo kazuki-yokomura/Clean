@@ -89,9 +89,9 @@ abstract class Enum extends Foundation
     {
         $this->rules
             ->add('correctValue', [
-                'final'   => true,
-                'method'  => 'hasConstant',
-                'vars'    => ['object' => $this],
+                'final' => true,
+                'method' => 'hasConstant',
+                'vars' => ['object' => $this],
                 'message' => function ($value) {
                     $format = 'Invalid argument "%s".';
                     if (is_array($value)) {

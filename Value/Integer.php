@@ -7,7 +7,7 @@ namespace Clean\Value;
  */
 class Integer extends Numeric
 {
-    /** @inheritdoc */
+    /** @var int numeric precision */
     protected $precision = 0;
 
     /** @inheritdoc */

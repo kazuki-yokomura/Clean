@@ -23,11 +23,11 @@ class File extends Foundation
 
     /** @var array $uploadErrors file upload error */
     protected $uploadErrors = [
-        UPLOAD_ERR_OK         => 'There is no error, the file uploaded with success',
-        UPLOAD_ERR_INI_SIZE   => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        UPLOAD_ERR_FORM_SIZE  => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
-        UPLOAD_ERR_PARTIAL    => 'The uploaded file was only partially uploaded',
-        UPLOAD_ERR_NO_FILE    => 'No file was uploaded',
+        UPLOAD_ERR_OK => 'There is no error, the file uploaded with success',
+        UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded',
+        UPLOAD_ERR_NO_FILE => 'No file was uploaded',
         UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder',
         UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
         UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload.',
@@ -68,16 +68,16 @@ class File extends Foundation
     {
         $this->rules
             ->add('isFile', [
-                'final'    => true,
-                'method'   => 'isFile',
+                'final' => true,
+                'method' => 'isFile',
                 'provider' => 'Clean\Rule\FileMethod',
-                'message'  => 'Is not upload file.'
+                'message' => 'Is not upload file.'
             ])
             ->add('uploadError', [
-                'final'    => true,
-                'method'   => 'hasUploadError',
+                'final' => true,
+                'method' => 'hasUploadError',
                 'provider' => 'Clean\Rule\FileMethod',
-                'message'  => function (array $value) {
+                'message' => function (array $value) {
                     if (isset($this->uploadErrors[$value['error']])) {
                         return $this->uploadErrors[$value['error']];
                     }
@@ -86,8 +86,8 @@ class File extends Foundation
                 }
             ])
             ->add('maxNameLength', [
-                'method'   => 'maxNameLength',
-                'vars'     => ['maxCharacters' => $this->maxNameLength],
+                'method' => 'maxNameLength',
+                'vars' => ['maxCharacters' => $this->maxNameLength],
                 'provider' => 'Clean\Rule\FileMethod',
                 'message' => function (array $value) {
                     $format = "Can't use %s characters name. Can use short to %s characters";
@@ -96,28 +96,28 @@ class File extends Foundation
                 }
             ])
             ->add('maxBytes', [
-                'method'   => 'maxBytes',
-                'vars'     => ['maxBytes' => $this->maxBytes],
+                'method' => 'maxBytes',
+                'vars' => ['maxBytes' => $this->maxBytes],
                 'provider' => 'Clean\Rule\FileMethod',
-                'message'  => function (array $value) {
+                'message' => function (array $value) {
                     $format = 'Maximam size is %s. Can\'t input %s.';
 
                     return sprintf($format, number_format($this->maxBytes), number_format($value['size']));
                 }
             ])
             ->add('allowExtensions', [
-                'method'   => 'allowExtensions',
-                'vars'     => ['allowExtensions' => $this->allowExtensions],
+                'method' => 'allowExtensions',
+                'vars' => ['allowExtensions' => $this->allowExtensions],
                 'provider' => 'Clean\Rule\FileMethod',
-                'message'  => function (array $value) {
+                'message' => function (array $value) {
                     return "{$value['name']} has invalid extensions.";
                 }
             ])
             ->add('allowMimeTypes', [
-                'method'   => 'allowMimeTypes',
-                'vars'     => ['allowMimeTypes' => $this->allowMimeTypes],
+                'method' => 'allowMimeTypes',
+                'vars' => ['allowMimeTypes' => $this->allowMimeTypes],
                 'provider' => 'Clean\Rule\FileMethod',
-                'message'  => function (array $value) {
+                'message' => function (array $value) {
                     return "{$value['type']} is invalid type.";
                 }
             ]);

@@ -20,8 +20,8 @@ class Pattern extends Text
         parent::setRule();
         $this->rules
             ->add('missPattern', [
-                'method'  => 'pregMatch',
-                'vars'    => ['pattern' => $this->pattern],
+                'method' => 'pregMatch',
+                'vars' => ['pattern' => $this->pattern],
                 'message' => 'Miss match pattern.'
             ]);
     }

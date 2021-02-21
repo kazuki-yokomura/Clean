@@ -50,13 +50,13 @@ class Text extends Foundation
     {
         $this->rules
             ->add('notString', [
-                'final'   => true,
-                'method'  => 'isScalar',
+                'final' => true,
+                'method' => 'isScalar',
                 'message' => 'Not string value.'
             ])
             ->add('minLength', [
-                'method'  => 'minCharacters',
-                'vars'    => ['min' => $this->minCharacters],
+                'method' => 'minCharacters',
+                'vars' => ['min' => $this->minCharacters],
                 'message' => function (string $value) {
                     $format = "Can't use %s characters string. You can use more than %s characters.";
 
@@ -64,8 +64,8 @@ class Text extends Foundation
                 }
             ])
             ->add('maxLength', [
-                'method'  => 'maxCharacters',
-                'vars'    => ['max' => $this->maxCharacters],
+                'method' => 'maxCharacters',
+                'vars' => ['max' => $this->maxCharacters],
                 'message' => function (string $value) {
                     $format = "Can't use %s characters string. Can use up to %s characters";
 

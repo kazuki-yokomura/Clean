@@ -55,8 +55,8 @@ abstract class Json extends Structure
     protected function setRule(): void
     {
         $this->rules->add('__parseError', [
-            'final'   => true,
-            'method'  => 'canJsonEncode',
+            'final' => true,
+            'method' => 'canJsonEncode',
             'message' => function ($value) {
                 return json_last_error_msg();
             }

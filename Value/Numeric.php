@@ -207,13 +207,13 @@ class Numeric extends Foundation
     {
         $this->rules
             ->add('invalid', [
-                'final'   => true,
-                'method'  => 'isNumeric',
+                'final' => true,
+                'method' => 'isNumeric',
                 'message' => 'Not numeric value.'
             ])
             ->add('minValue', [
-                'method'  => 'minValue',
-                'vars'    => ['min' => $this->minValue],
+                'method' => 'minValue',
+                'vars' => ['min' => $this->minValue],
                 'message' => function ($value) {
                     $format = "Minimam value is %f. Can't input %f.";
 
@@ -221,8 +221,8 @@ class Numeric extends Foundation
                 }
             ])
             ->add('maxValue', [
-                'method'  => 'maxValue',
-                'vars'    => ['max' => $this->maxValue],
+                'method' => 'maxValue',
+                'vars' => ['max' => $this->maxValue],
                 'message' => function ($value) {
                     $format = "Maximam value is %f. Can't input %f.";
 

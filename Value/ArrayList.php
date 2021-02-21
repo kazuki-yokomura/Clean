@@ -103,17 +103,17 @@ abstract class ArrayList extends Foundation implements \Iterator, \ArrayAccess
     {
         $this->rules
             ->add('invalid', [
-                'final'   => true,
-                'method'  => 'isArray',
+                'final' => true,
+                'method' => 'isArray',
                 'message' => 'Not array.'
             ]);
         if ($this->allowKeys) {
             $this->rules
                 ->add('isAllowKeys', [
-                    'final'    => true,
-                    'method'   => 'isAllowKeys',
-                    'vars'     => ['keys' => $this->allowKeys],
-                    'message'  => 'invalid keys.',
+                    'final' => true,
+                    'method' => 'isAllowKeys',
+                    'vars' => ['keys' => $this->allowKeys],
+                    'message' => 'invalid keys.',
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
         }

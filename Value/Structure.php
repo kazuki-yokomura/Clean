@@ -157,13 +157,13 @@ abstract class Structure extends Foundation
     protected function setRule(): void
     {
         $defaultInfo = [
-            'nullable'  => false,
-            'moreThan'  => null,
-            'lessThan'  => null,
-            'orMore'    => null,
-            'orLess'    => null,
-            'same'      => null,
-            'equals'    => null,
+            'nullable' => false,
+            'moreThan' => null,
+            'lessThan' => null,
+            'orMore' => null,
+            'orLess' => null,
+            'same' => null,
+            'equals' => null,
         ];
 
         // TODO: message
@@ -171,24 +171,24 @@ abstract class Structure extends Foundation
             $valueInfo += $defaultInfo;
             if ($valueInfo['nullable']) {
                 $this->rules->add($key, [
-                    'allow'    => true,
-                    'method'   => 'isNull',
-                    'vars'     => ['key' => $key],
+                    'allow' => true,
+                    'method' => 'isNull',
+                    'vars' => ['key' => $key],
                     'provider' => 'Clean\Rule\AllowMethod'
                 ]);
             } else {
                 $this->rules->add($key . '.isNotNull', [
-                    'method'   => 'isNotNull',
-                    'vars'     => ['key' => $key],
+                    'method' => 'isNotNull',
+                    'vars' => ['key' => $key],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['moreThan']) {
                 $this->rules->add($key . '.moreThan', [
                     'method' => 'moreThan',
-                    'vars'   => [
-                        'key'      => $key,
-                        'target'   => $target,
+                    'vars' => [
+                        'key' => $key,
+                        'target' => $target,
                     ],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
@@ -196,9 +196,9 @@ abstract class Structure extends Foundation
             if ($target = $valueInfo['lessThan']) {
                 $this->rules->add($key . '.lessThan', [
                     'method' => 'lessThan',
-                    'vars'   => [
-                        'key'      => $key,
-                        'target'   => $target,
+                    'vars' => [
+                        'key' => $key,
+                        'target' => $target,
                     ],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
@@ -206,9 +206,9 @@ abstract class Structure extends Foundation
             if ($target = $valueInfo['moreOr']) {
                 $this->rules->add($key . '.moreOr', [
                     'method' => 'moreOr',
-                    'vars'   => [
-                        'key'      => $key,
-                        'target'   => $target,
+                    'vars' => [
+                        'key' => $key,
+                        'target' => $target,
                     ],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
@@ -216,9 +216,9 @@ abstract class Structure extends Foundation
             if ($target = $valueInfo['lessOr']) {
                 $this->rules->add($key . '.lessOr', [
                     'method' => 'lessOr',
-                    'vars'   => [
-                        'key'      => $key,
-                        'target'   => $target,
+                    'vars' => [
+                        'key' => $key,
+                        'target' => $target,
                     ],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
@@ -226,9 +226,9 @@ abstract class Structure extends Foundation
             if ($target = $valueInfo['same']) {
                 $this->rules->add($key . '.same', [
                     'method' => 'same',
-                    'vars'   => [
-                        'key'      => $key,
-                        'target'   => $target,
+                    'vars' => [
+                        'key' => $key,
+                        'target' => $target,
                     ],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
@@ -236,9 +236,9 @@ abstract class Structure extends Foundation
             if ($target = $valueInfo['equals']) {
                 $this->rules->add($key . '.equals', [
                     'method' => 'equals',
-                    'vars'   => [
-                        'key'      => $key,
-                        'target'   => $target,
+                    'vars' => [
+                        'key' => $key,
+                        'target' => $target,
                     ],
                     'provider' => 'Clean\Rule\StructureMethod'
                 ]);
