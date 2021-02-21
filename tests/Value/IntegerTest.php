@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Value\Integer;
+use ValueValidator\Value\Integer;
 
 /**
  *

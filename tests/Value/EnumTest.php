@@ -1,6 +1,6 @@
 <?php
 
-use Clean\Value\Enum;
+use ValueValidator\Value\Enum;
 use PHPUnit\Framework\TestCase;
 
 /**

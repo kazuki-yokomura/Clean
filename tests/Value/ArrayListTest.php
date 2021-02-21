@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Value\ArrayList;
+use ValueValidator\Value\ArrayList;
 
 /**
  *
@@ -17,14 +17,14 @@ class ArrayListTest extends TestCase
         ];
 
         $arrayList = new class($value) extends ArrayList {
-            protected $valueClass = '\Clean\Value\Integer';
+            protected $valueClass = '\ValueValidator\Value\Integer';
         };
 
         $this->assertSame(false, $arrayList->hasErrors());
 
         $expected = [];
         foreach ($value as $key => $v) {
-            $expected[$key] = new \Clean\Value\Integer($v);
+            $expected[$key] = new \ValueValidator\Value\Integer($v);
         }
 
         $this->assertEquals($expected, $arrayList->get());
@@ -36,7 +36,7 @@ class ArrayListTest extends TestCase
     public function testAllowKeys($value, $hasError)
     {
         $arrayList = new class($value) extends ArrayList {
-            protected $valueClass = '\Clean\Value\Integer';
+            protected $valueClass = '\ValueValidator\Value\Integer';
 
             protected function setAllowKeys(): void
             {
@@ -99,7 +99,7 @@ class ArrayListTest extends TestCase
     public function testGetErrors($value, $errors)
     {
         $arrayList = new class($value) extends ArrayList {
-            protected $valueClass = '\Clean\Value\Numeric';
+            protected $valueClass = '\ValueValidator\Value\Numeric';
 
             protected function setAllowKeys(): void
             {
@@ -152,11 +152,11 @@ class ArrayListTest extends TestCase
         ];
 
         $arrayList = new class($value) extends ArrayList {
-            protected $valueClass = '\Clean\Value\Text';
+            protected $valueClass = '\ValueValidator\Value\Text';
         };
 
         foreach ($arrayList as $key => $valueObject) {
-            $this->assertEquals(new \Clean\Value\Text($value[$key]), $valueObject);
+            $this->assertEquals(new \ValueValidator\Value\Text($value[$key]), $valueObject);
         }
     }
 
@@ -171,9 +171,9 @@ class ArrayListTest extends TestCase
         ];
 
         $arrayList = new class($value) extends ArrayList {
-            protected $valueClass = '\Clean\Value\Text';
+            protected $valueClass = '\ValueValidator\Value\Text';
         };
 
-        $this->assertEquals(new \Clean\Value\Text('baz'), $arrayList['three']);
+        $this->assertEquals(new \ValueValidator\Value\Text('baz'), $arrayList['three']);
     }
 }

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Value\Foundation;
+use ValueValidator\Value\Foundation;
 
 /**
  * structure value object
@@ -174,13 +174,13 @@ abstract class Structure extends Foundation
                     'allow' => true,
                     'method' => 'isNull',
                     'vars' => ['key' => $key],
-                    'provider' => 'Clean\Rule\AllowMethod'
+                    'provider' => 'ValueValidator\Rule\AllowMethod'
                 ]);
             } else {
                 $this->rules->add($key . '.isNotNull', [
                     'method' => 'isNotNull',
                     'vars' => ['key' => $key],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['moreThan']) {
@@ -190,7 +190,7 @@ abstract class Structure extends Foundation
                         'key' => $key,
                         'target' => $target,
                     ],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['lessThan']) {
@@ -200,7 +200,7 @@ abstract class Structure extends Foundation
                         'key' => $key,
                         'target' => $target,
                     ],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['moreOr']) {
@@ -210,7 +210,7 @@ abstract class Structure extends Foundation
                         'key' => $key,
                         'target' => $target,
                     ],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['lessOr']) {
@@ -220,7 +220,7 @@ abstract class Structure extends Foundation
                         'key' => $key,
                         'target' => $target,
                     ],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['same']) {
@@ -230,7 +230,7 @@ abstract class Structure extends Foundation
                         'key' => $key,
                         'target' => $target,
                     ],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
             if ($target = $valueInfo['equals']) {
@@ -240,7 +240,7 @@ abstract class Structure extends Foundation
                         'key' => $key,
                         'target' => $target,
                     ],
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
             }
         }

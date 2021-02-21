@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Value\Url;
+use ValueValidator\Value\Url;
 
 /**
  * pattern test

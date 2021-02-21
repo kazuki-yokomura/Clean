@@ -1,6 +1,6 @@
 <?php
 
-use Clean\Value\File;
+use ValueValidator\Value\File;
 use PHPUnit\Framework\TestCase;
 
 /**

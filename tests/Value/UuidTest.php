@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Value\Uuid;
+use ValueValidator\Value\Uuid;
 
 /**
  * pattern test

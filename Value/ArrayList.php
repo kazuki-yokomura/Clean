@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Value\Foundation;
+use ValueValidator\Value\Foundation;
 
 /**
  * ArrayList
@@ -114,7 +114,7 @@ abstract class ArrayList extends Foundation implements \Iterator, \ArrayAccess
                     'method' => 'isAllowKeys',
                     'vars' => ['keys' => $this->allowKeys],
                     'message' => 'invalid keys.',
-                    'provider' => 'Clean\Rule\StructureMethod'
+                    'provider' => 'ValueValidator\Rule\StructureMethod'
                 ]);
         }
     }

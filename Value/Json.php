@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Value\Structure;
+use ValueValidator\Value\Structure;
 
 /**
  * json value object

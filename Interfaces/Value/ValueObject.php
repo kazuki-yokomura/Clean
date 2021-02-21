@@ -1,5 +1,5 @@
 <?php
-namespace Clean\Interfaces\Value;
+namespace ValueValidator\Interfaces\Value;
 
 /**
  * data object interface.

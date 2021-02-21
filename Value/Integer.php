@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
 /**
  * integer value object

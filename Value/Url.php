@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Value\Pattern;
+use ValueValidator\Value\Pattern;
 
 /**
  * url pattern value object

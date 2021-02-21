@@ -1,6 +1,6 @@
 <?php
 // declare(strict_types=1);
-namespace Clean\Rule;
+namespace ValueValidator\Rule;
 
 use ReflectionObject;
 
@@ -8,7 +8,7 @@ use ReflectionObject;
  * rules validate method class
  * useable static
  *
- * @used-by \Clean\Rule\Rules
+ * @used-by \ValueValidator\Rule\Rules
  */
 class Method
 {

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Value\Structure;
+use ValueValidator\Value\Structure;
 
 /**
  *
@@ -16,17 +16,17 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'integer1' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'lessOr'      => 'integer2'
                 ],
                 'integer2' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ],
                 'text' => [
-                    'valueObject' => 'Clean\Value\Text',
+                    'valueObject' => 'ValueValidator\Value\Text',
                 ],
                 'url' => [
-                    'valueObject' => 'Clean\Value\Url',
+                    'valueObject' => 'ValueValidator\Value\Url',
                     'nullable'    => true
                 ]
             ];
@@ -107,10 +107,10 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'moreThan'    => 'lower',
                 ]
             ];
@@ -176,10 +176,10 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'moreThan'    => 'lower',
                 ]
             ];
@@ -245,10 +245,10 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'moreThan'    => 'lower',
                 ]
             ];
@@ -314,11 +314,11 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'lessThan'    => 'higher',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ]
             ];
         };
@@ -383,11 +383,11 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'lessThan'    => 'higher',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                 ]
             ];
         };
@@ -452,11 +452,11 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'lessThan'    => 'higher',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ]
             ];
         };
@@ -521,10 +521,10 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'moreOr'      => 'lower',
                 ]
             ];
@@ -588,10 +588,10 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'moreOr'      => 'lower',
                 ]
             ];
@@ -655,10 +655,10 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'moreOr'      => 'lower',
                 ]
             ];
@@ -722,11 +722,11 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'lessOr'      => 'higher',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ]
             ];
         };
@@ -789,11 +789,11 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'lessOr'      => 'higher',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                 ]
             ];
         };
@@ -856,11 +856,11 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'lessOr'      => 'higher',
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                 ]
             ];
         };
@@ -923,12 +923,12 @@ class StructureTest extends TestCase
         $structure = new class($value) extends Structure {
             protected $scheme = [
                 'lower' => [
-                    'valueObject' => 'Clean\Value\Integer',
+                    'valueObject' => 'ValueValidator\Value\Integer',
                     'lessOr'      => 'higher',
                     'nullable'    => true
                 ],
                 'higher' => [
-                    'valueObject' => 'Clean\Value\Numeric',
+                    'valueObject' => 'ValueValidator\Value\Numeric',
                     'nullable'    => true
                 ]
             ];

@@ -1,6 +1,6 @@
 <?php
 // declare(strict_types=1);
-namespace Clean\Rule;
+namespace ValueValidator\Rule;
 
 use Closure;
 
@@ -8,7 +8,7 @@ use Closure;
  * roules object
  * 正直普通に アダプターにして Cake Laravel のバリデーション使えばよかったかも
  *
- * @uses \Clean\Rule\Method
+ * @uses \ValueValidator\Rule\Method
  */
 class Rules
 {
@@ -19,7 +19,7 @@ class Rules
         'vars'     => [],
         'message'  => '',
         'value'    => null,
-        'provider' => 'Clean\Rule\Method'
+        'provider' => 'ValueValidator\Rule\Method'
     ];
 
     private $rules = [];

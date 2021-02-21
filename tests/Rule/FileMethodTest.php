@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Rule\FileMethod;
+use ValueValidator\Rule\FileMethod;
 
 /**
  * rule method test

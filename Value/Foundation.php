@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Interfaces\Value\ValueObject;
-use Clean\Rule\Rules;
+use ValueValidator\Interfaces\Value\ValueObject;
+use ValueValidator\Rule\Rules;
 
 /**
  * data object foundation

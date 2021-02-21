@@ -1,2 +1,2 @@
-# Clean
-Clean Architecture test repo
+# ValueValidator
+ValueValidator Architecture test repo

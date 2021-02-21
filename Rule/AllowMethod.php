@@ -1,6 +1,6 @@
 <?php
 // declare(strict_types=1);
-namespace Clean\Rule;
+namespace ValueValidator\Rule;
 
 /**
  * allow rule method

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Clean\Value\JpTel;
+use ValueValidator\Value\JpTel;
 
 /**
  * pattern test

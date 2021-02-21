@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Value\Foundation;
+use ValueValidator\Value\Foundation;
 
 /**
  * file value object
@@ -70,13 +70,13 @@ class File extends Foundation
             ->add('isFile', [
                 'final' => true,
                 'method' => 'isFile',
-                'provider' => 'Clean\Rule\FileMethod',
+                'provider' => 'ValueValidator\Rule\FileMethod',
                 'message' => 'Is not upload file.'
             ])
             ->add('uploadError', [
                 'final' => true,
                 'method' => 'hasUploadError',
-                'provider' => 'Clean\Rule\FileMethod',
+                'provider' => 'ValueValidator\Rule\FileMethod',
                 'message' => function (array $value) {
                     if (isset($this->uploadErrors[$value['error']])) {
                         return $this->uploadErrors[$value['error']];
@@ -88,7 +88,7 @@ class File extends Foundation
             ->add('maxNameLength', [
                 'method' => 'maxNameLength',
                 'vars' => ['maxCharacters' => $this->maxNameLength],
-                'provider' => 'Clean\Rule\FileMethod',
+                'provider' => 'ValueValidator\Rule\FileMethod',
                 'message' => function (array $value) {
                     $format = "Can't use %s characters name. Can use short to %s characters";
 
@@ -98,7 +98,7 @@ class File extends Foundation
             ->add('maxBytes', [
                 'method' => 'maxBytes',
                 'vars' => ['maxBytes' => $this->maxBytes],
-                'provider' => 'Clean\Rule\FileMethod',
+                'provider' => 'ValueValidator\Rule\FileMethod',
                 'message' => function (array $value) {
                     $format = 'Maximam size is %s. Can\'t input %s.';
 
@@ -108,7 +108,7 @@ class File extends Foundation
             ->add('allowExtensions', [
                 'method' => 'allowExtensions',
                 'vars' => ['allowExtensions' => $this->allowExtensions],
-                'provider' => 'Clean\Rule\FileMethod',
+                'provider' => 'ValueValidator\Rule\FileMethod',
                 'message' => function (array $value) {
                     return "{$value['name']} has invalid extensions.";
                 }
@@ -116,7 +116,7 @@ class File extends Foundation
             ->add('allowMimeTypes', [
                 'method' => 'allowMimeTypes',
                 'vars' => ['allowMimeTypes' => $this->allowMimeTypes],
-                'provider' => 'Clean\Rule\FileMethod',
+                'provider' => 'ValueValidator\Rule\FileMethod',
                 'message' => function (array $value) {
                     return "{$value['type']} is invalid type.";
                 }

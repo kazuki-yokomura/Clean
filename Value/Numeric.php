@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace Clean\Value;
+namespace ValueValidator\Value;
 
-use Clean\Value\Foundation;
-use Clean\Rule\Method;
+use ValueValidator\Value\Foundation;
+use ValueValidator\Rule\Method;
 
 /**
  * numeric value object.

@@ -3,7 +3,7 @@
          verbose="true"
          bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite name="Clean">
+        <testsuite name="ValueValidator">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
