@@ -44,7 +44,7 @@ abstract class ArrayList extends Foundation implements \Iterator, \ArrayAccess
      */
     public function __toString()
     {
-        return (string)json_encode($value);
+        return (string)json_encode($this->value);
     }
 
     /**
