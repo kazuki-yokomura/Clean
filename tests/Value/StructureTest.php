@@ -14,25 +14,22 @@ class StructureTest extends TestCase
     public function testCanInput($value, $hasError)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'integer1' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'lessOr'      => 'integer2'
-                    ],
-                    'integer2' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ],
-                    'text' => [
-                        'valueObject' => 'Clean\Value\Text',
-                    ],
-                    'url' => [
-                        'valueObject' => 'Clean\Value\Url',
-                        'nullable'    => true
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'integer1' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'lessOr'      => 'integer2'
+                ],
+                'integer2' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ],
+                'text' => [
+                    'valueObject' => 'Clean\Value\Text',
+                ],
+                'url' => [
+                    'valueObject' => 'Clean\Value\Url',
+                    'nullable'    => true
+                ]
+            ];
         };
 
         $this->assertSame($hasError, $structure->hasErrors());
@@ -108,18 +105,15 @@ class StructureTest extends TestCase
     public function testMoreThan($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'moreThan'    => 'lower',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'moreThan'    => 'lower',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -180,18 +174,15 @@ class StructureTest extends TestCase
     public function testMoreThanFloat($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'moreThan'    => 'lower',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'moreThan'    => 'lower',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -252,18 +243,15 @@ class StructureTest extends TestCase
     public function testMoreThanFloatInt($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'moreThan'    => 'lower',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'moreThan'    => 'lower',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -324,18 +312,15 @@ class StructureTest extends TestCase
     public function testLessThan($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'lessThan'    => 'higher',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'lessThan'    => 'higher',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -396,18 +381,15 @@ class StructureTest extends TestCase
     public function testLessThanFloat($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'lessThan'    => 'higher',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'lessThan'    => 'higher',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -468,18 +450,15 @@ class StructureTest extends TestCase
     public function testLessThanFloatInt($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'lessThan'    => 'higher',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'lessThan'    => 'higher',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -540,18 +519,15 @@ class StructureTest extends TestCase
     public function testMoreOr($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'moreOr'      => 'lower',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'moreOr'      => 'lower',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -610,18 +586,15 @@ class StructureTest extends TestCase
     public function testMoreOrFloat($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'moreOr'      => 'lower',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'moreOr'      => 'lower',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -680,18 +653,15 @@ class StructureTest extends TestCase
     public function testMoreOrFloatInt($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'moreOr'      => 'lower',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'moreOr'      => 'lower',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -750,18 +720,15 @@ class StructureTest extends TestCase
     public function testLessOr($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'lessOr'      => 'higher',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'lessOr'      => 'higher',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -820,18 +787,15 @@ class StructureTest extends TestCase
     public function testLessOrFloat($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'lessOr'      => 'higher',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'lessOr'      => 'higher',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -890,18 +854,15 @@ class StructureTest extends TestCase
     public function testLessOrFloatInt($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'lessOr'      => 'higher',
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'lessOr'      => 'higher',
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());
@@ -960,20 +921,17 @@ class StructureTest extends TestCase
     public function testNullableComparison($value, $errors)
     {
         $structure = new class($value) extends Structure {
-            protected function setScheme(): void
-            {
-                $this->scheme = [
-                    'lower' => [
-                        'valueObject' => 'Clean\Value\Integer',
-                        'lessOr'      => 'higher',
-                        'nullable'    => true
-                    ],
-                    'higher' => [
-                        'valueObject' => 'Clean\Value\Numeric',
-                        'nullable'    => true
-                    ]
-                ];
-            }
+            protected $scheme = [
+                'lower' => [
+                    'valueObject' => 'Clean\Value\Integer',
+                    'lessOr'      => 'higher',
+                    'nullable'    => true
+                ],
+                'higher' => [
+                    'valueObject' => 'Clean\Value\Numeric',
+                    'nullable'    => true
+                ]
+            ];
         };
 
         $this->assertSame($errors, $structure->getErrors());

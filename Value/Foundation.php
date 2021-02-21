@@ -48,11 +48,7 @@ abstract class Foundation implements ValueObject
         return new $self(...$constructValues);
     }
 
-    /**
-     * if invoke object, create self data object.
-     *
-     * @return self
-     */
+    /** @inheritdoc */
     public function getErrors(): array
     {
         return $this->errors;
@@ -70,21 +66,13 @@ abstract class Foundation implements ValueObject
         return !$this->hasErrors();
     }
 
-    /**
-     * has error this data
-     *
-     * @return bool
-     */
+    /** @inheritdoc */
     public function hasErrors(): bool
     {
         return (bool)$this->errors;
     }
 
-    /**
-     * get original value
-     *
-     * @return mixed
-     */
+    /** @inheritdoc */
     public function getOriginal()
     {
         return $this->original;
@@ -95,6 +83,7 @@ abstract class Foundation implements ValueObject
      */
     abstract protected function setRule(): void;
 
-    // TODO: やっぱりエラ〜メッセージは継承したときようんに必要だわ。
+    // TODO: やっぱりエラ〜メッセージは継承したときように必要だわ。
     // もう毎回 value が渡ってくるようにして、メッセージプロパティに入れるようにしよう
+    // TODO: 仕様クラスを作って、ここでセットするんじゃなくて、ここでは仕様を継承するようにしよう。
 }

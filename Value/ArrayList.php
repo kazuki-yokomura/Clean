@@ -64,21 +64,13 @@ abstract class ArrayList extends Foundation implements \Iterator, \ArrayAccess
         return $arrayList;
     }
 
-    /**
-     * get parsed value
-     *
-     * @return mixed
-     */
+    /** @inheritdoc */
     public function get()
     {
         return $this->value;
     }
 
-    /**
-     * get value errors
-     *
-     * @return array
-     */
+    /** @inheritdoc */
     public function getErrors(): array
     {
         $valueErrors = [];
@@ -91,11 +83,7 @@ abstract class ArrayList extends Foundation implements \Iterator, \ArrayAccess
         return $valueErrors + $this->errors;
     }
 
-    /**
-     * has error
-     *
-     * @return bool
-     */
+    /** @inheritdoc */
     public function hasErrors(): bool
     {
         if ($this->errors) {
@@ -110,9 +98,7 @@ abstract class ArrayList extends Foundation implements \Iterator, \ArrayAccess
         return false;
     }
 
-    /**
-     * set default rule
-     */
+    /** @inheritdoc */
     protected function setRule(): void
     {
         $this->rules

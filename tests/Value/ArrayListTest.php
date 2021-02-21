@@ -31,7 +31,7 @@ class ArrayListTest extends TestCase
     }
 
     /**
-     * @dataProvider allowKyesDataSet
+     * @dataProvider allowKeysDataSet
      */
     public function testAllowKeys($value, $hasError)
     {
@@ -47,7 +47,7 @@ class ArrayListTest extends TestCase
         $this->assertSame($hasError, $arrayList->hasErrors());
     }
 
-    public function allowKyesDataSet()
+    public function allowKeysDataSet()
     {
         return [
             'valid' => [
@@ -96,7 +96,7 @@ class ArrayListTest extends TestCase
     /**
      * @dataProvider getErrorsDataSet
      */
-    public function testGetGetErrors($value, $errors)
+    public function testGetErrors($value, $errors)
     {
         $arrayList = new class($value) extends ArrayList {
             protected $valueClass = '\Clean\Value\Numeric';

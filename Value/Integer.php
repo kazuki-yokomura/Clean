@@ -7,14 +7,10 @@ namespace Clean\Value;
  */
 class Integer extends Numeric
 {
-    /** @var int numeric precision */
+    /** @inheritdoc */
     protected $precision = 0;
 
-    /**
-     * return this value
-     *
-     * @return int|float
-     */
+    /** @inheritdoc */
     public function get()
     {
         return (int)$this->value;

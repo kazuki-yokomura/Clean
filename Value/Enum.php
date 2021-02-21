@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
-use Clean\Interfaces\Value\ValueObject;
 use Clean\Value\Foundation;
 use ReflectionObject;
 
@@ -11,7 +10,7 @@ use ReflectionObject;
  *
  * set constract before use
  */
-abstract class Enum extends Foundation implements ValueObject
+abstract class Enum extends Foundation
 {
     /** @var array $displayMap array(const_name => display) */
     protected $displayMap = [];

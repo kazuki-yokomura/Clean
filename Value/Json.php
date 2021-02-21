@@ -2,13 +2,12 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
-use Clean\Traits\UseSchemeTrait;
 use Clean\Value\Structure;
 
 /**
  * json value object
  */
-class Json extends Structure
+abstract class Json extends Structure
 {
     /** @var int $options json encode/decode options */
     protected $options = 0;

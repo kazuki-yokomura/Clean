@@ -9,6 +9,7 @@ use Clean\Value\Text;
  */
 class Pattern extends Text
 {
+    /** @var string regex pattern */
     protected $pattern;
 
     /**

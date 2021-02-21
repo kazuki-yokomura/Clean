@@ -4,7 +4,6 @@ namespace Clean\Value;
 
 use Clean\Value\Pattern;
 
-
 /**
  * url pattern value object
  */

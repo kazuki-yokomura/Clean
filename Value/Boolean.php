@@ -31,11 +31,7 @@ class Boolean extends Foundation
         return (string)(int)$this->value;
     }
 
-    /**
-     * return value
-     *
-     * @return bool
-     */
+    /** @inheritdoc */
     public function get(): bool
     {
         return $this->value;
@@ -44,15 +40,17 @@ class Boolean extends Foundation
     /**
      * nothing validate
      *
-     * @return bool
+     * @inheritdoc
      */
-    protected function validate(): bool
+    protected function validate($value): bool
     {
         return true;
     }
 
     /**
      * not check value. All type cast bool.
+     *
+     * @inheritdoc
      */
     protected function setRule(): void
     {

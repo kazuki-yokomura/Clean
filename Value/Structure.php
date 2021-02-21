@@ -31,7 +31,6 @@ abstract class Structure extends Foundation
 
     public function __construct($value)
     {
-        $this->setScheme();
         parent::__construct($value);
 
         $patched = $this->patch($value);
@@ -114,21 +113,13 @@ abstract class Structure extends Foundation
         return array_intersect_key($this->scheme, $input);
     }
 
-    /**
-     * get parsed value
-     *
-     * @return mixed
-     */
+    /** @inheritdoc */
     public function get()
     {
         return $this->value;
     }
 
-    /**
-     * get value errors
-     *
-     * @return array
-     */
+    /** @inheritdoc */
     public function getErrors(): array
     {
         $valueErrors = [];
@@ -144,11 +135,7 @@ abstract class Structure extends Foundation
         return $valueErrors + $this->errors;
     }
 
-    /**
-     * has error
-     *
-     * @return bool
-     */
+    /** @inheritdoc */
     public function hasErrors(): bool
     {
         if ($this->errors) {
@@ -166,9 +153,7 @@ abstract class Structure extends Foundation
         return false;
     }
 
-    /**
-     * set default rule
-     */
+    /** @inheritdoc */
     protected function setRule(): void
     {
         $defaultInfo = [
@@ -260,9 +245,4 @@ abstract class Structure extends Foundation
             }
         }
     }
-
-    /**
-     * set structure scheme
-     */
-    abstract protected function setScheme(): void;
 }

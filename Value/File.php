@@ -47,11 +47,7 @@ class File extends Foundation
         }
     }
 
-    /**
-     * gat value
-     *
-     * @return array
-     */
+    /** @inheritdoc */
     public function get(): array
     {
         return $this->value;
@@ -67,9 +63,7 @@ class File extends Foundation
         return (string)json_encode($this->value);
     }
 
-    /**
-     * set rule
-     */
+    /** @inheritdoc */
     protected function setRule(): void
     {
         $this->rules

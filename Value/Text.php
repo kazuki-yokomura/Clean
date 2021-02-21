@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Clean\Value;
 
-use Clean\Rules\Method;
 use Clean\Value\Foundation;
 
 /**
@@ -40,19 +39,13 @@ class Text extends Foundation
         return $this->value;
     }
 
-    /**
-     * return this value
-     *
-     * @return string
-     */
+    /** @inheritdoc */
     public function get(): string
     {
         return $this->value;
     }
 
-    /**
-     * set default rule.
-     */
+    /** @inheritdoc */
     protected function setRule(): void
     {
         $this->rules
